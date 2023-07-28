@@ -18,6 +18,10 @@ public class TourService : ITourService
     /// </summary>
     public async Task<Tour> CreateTour(Tour tour)
     {
+        if (tour.Date.Year < 2021 ){
+            throw new Exception("The tour dates need to be scheduled for after 2021.");
+        }
+
         var newTour = new Tour{
             Name = tour.Name,
             City = tour.City,

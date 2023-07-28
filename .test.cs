@@ -1,12 +1,7 @@
-public async Task<Song> CreateSong(Song song)
-    {   
-        var newSong = new Song{
-            Name = song.Name,
-            Duration = song.Duration,
-            AlbumId = song.AlbumId
-        };
+List<string> bannedWords = new List<string>{"respeto", "guerra", "poder", "amor"};
+        var wordsInName = album.Name.ToLower().Split(' ').ToList();
+        bool bannedWordsFound = wordsInName.Intersect(bannedWords).Any();
 
-        await _unitOfWork.SongRepository.AddAsync(newSong);
-        await _unitOfWork.SaveAsync();
-        return newSong;
-    }
+        if (bannedWordsFound == true){
+            throw new Exception("lnvalid album name.");
+        } 

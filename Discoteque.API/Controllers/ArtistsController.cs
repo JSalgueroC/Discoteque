@@ -33,8 +33,13 @@ namespace Discoteque.API.Controllers
         [Route("CreateArtistAsync")]
         public async Task<IActionResult> CreateArtistAsync(Artist artist)
         {
-            var result = await _artistsService.CreateArtist(artist);
-            return Ok(result);
+            try{
+                var result = await _artistsService.CreateArtist(artist);
+                return Ok(result);
+            }
+            catch(Exception e){
+                return BadRequest(e.Message);
+            }
         }
 
         [HttpPatch]

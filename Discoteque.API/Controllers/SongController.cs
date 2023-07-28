@@ -24,9 +24,23 @@ namespace Discoteque.API.Controllers
         [HttpPost]
         [Route("CreateSong")]
         public async Task<IActionResult> CreateSong(Song song){
+           try{
             var result = await _songService.CreateSong(song);
             return Ok(result);
+           }
+           catch(Exception e){
+            return BadRequest (e.Message);
+           } 
+            
         }
+
+        /*[HttpPost]
+        [Route("CreateSongBatch")]
+        public async Trask<IActionResult> CreateSongBatch (List<Song> songBatch){
+            var result =  await _songService.CreateSongBatch(songBatch);
+            return Ok(result);
+        }
+        */
 
         [HttpDelete]
         [Route("DeleteSong")]

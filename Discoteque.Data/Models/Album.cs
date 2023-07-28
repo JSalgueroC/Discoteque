@@ -19,7 +19,11 @@ public  class Album : BaseEntity<int>
     /// The <see cref="Genres" /> the album belongs to 
     /// </summary>
     public Genres Genre { get; set; } = Genres.Unknown;
-    
+
+    /// <summary>
+    /// Album's price
+    /// </summary>
+    public float Price { get; set; } = 50000.00F;
     /// <summary>
     /// The <see cref="Artist"/> id this Album belongs to
     /// </summary>

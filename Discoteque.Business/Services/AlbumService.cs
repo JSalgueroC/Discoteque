@@ -1,3 +1,4 @@
+using System.Reflection.Metadata;
 using System.Security.Cryptography.X509Certificates;
 using Discoteque.Data;
 using Discoteque.Data.Models;
@@ -24,11 +25,28 @@ public class AlbumService : IAlbumService
     /// <returns>The created album with an Id assigned</returns>
     public async Task<Album> CreateAlbum(Album album)
     {
+        //List<string> bannedWords = new List<string>{"respeto", "guerra", "poder", "amor"};
+        //var wordsInName = album.Name.ToLower().Split(' ').ToList();
+
+        //bool bannedWordsFound = bannedWords.Any(word => wordsInName.Contains(word));
+        //if (bannedWordsFound == true){
+        //    throw new Exception("aha!");
+        //}
+        
+        if (album .Year < 1995 && album.Year >2023){
+            throw new Exception("The album's release year should fall between 1905 and 2023.");        
+
+        }
+        if (album.Price < 0){
+            throw new Exception("Price cannot be a negative number");
+        }
+
         var newAlbum = new Album{
             Name = album.Name,
             ArtistId = album.ArtistId,
             Genre = album.Genre,
-            Year = album.Year
+            Year = album.Year,
+            Price = album.Price
         };
         
         await _unitOfWork.AlbumRepository.AddAsync(newAlbum);

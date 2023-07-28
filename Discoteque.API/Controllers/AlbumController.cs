@@ -68,7 +68,12 @@ public class AlbumController : ControllerBase
     [Route("CreateAlbum")]
     public async Task<IActionResult> CreateAlbumsAsync(Album album)
     {
+        try{
         var result = await _albumService.CreateAlbum(album);
         return Ok(result);
+        }
+        catch(Exception e){
+            return BadRequest(e.Message);
+        }
     }
 }

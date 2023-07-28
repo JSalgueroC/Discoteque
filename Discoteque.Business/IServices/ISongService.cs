@@ -1,4 +1,5 @@
 using System.Reflection.Metadata;
+using Discoteque.Business.Services;
 using Discoteque.Data.Models;
 namespace Discoteque.Data.Services;
 
@@ -7,6 +8,10 @@ public interface ISongService{
     /// Creates a new <see cref="Song"/> entity in Database. 
     /// </summary>
     Task<Song> CreateSong(Song song);
+    /// <summary>
+    /// Creates a new <see cref="Song"/> entity in Database in batchmode. 
+    /// </summary>
+    //Task<Song> CreateSongBatch(List<Song> songBatch);
     /// <summary>
     /// Updates the <see cref="Song"/> entity in Database
     /// </summary>
@@ -40,4 +45,5 @@ public interface ISongService{
     /// </summary>
     /// <returns>A <see cref="List" /> of <see cref="Song"/> </returns>
     Task<IEnumerable<Song>> GetSongsByArtist(string artist);
+    
 }

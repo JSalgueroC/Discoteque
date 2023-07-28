@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Security.Cryptography.X509Certificates;
 using Discoteque.Data;
 using Discoteque.Data.Models;
@@ -17,6 +18,11 @@ public class SongService : ISongService
     /// </summary>
     public async Task<Song> CreateSong(Song song)
     {   
+        var albumExist = await _unitOfWork.AlbumRepository.FindAsync(song.AlbumId);
+
+        if (albumExist is null){
+            throw new Exception($"Album with {song.AlbumId} does not exist");
+        }
         var newSong = new Song{
             Name = song.Name,
             Duration = song.Duration,
@@ -28,6 +34,14 @@ public class SongService : ISongService
         return newSong;
     }
 
+    /*public async Task<Song> CreateSongBatch(List<Song> songBatch)
+    {   
+        foreach (var song in songBatch){
+            await CreateSong(song);
+            return song;
+        }
+    }
+    */
     public async Task<Song> DeleteSong(int id)
     {   
         await _unitOfWork.SongRepository.Delete(id);

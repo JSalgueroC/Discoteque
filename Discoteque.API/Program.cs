@@ -134,7 +134,7 @@ async void PopulateDb(WebApplication app)
         await albumService.CreateAlbum(new Discoteque.Data.Models.Album{
             Id = 1,
             Year = 2017,
-            Name = "Unstopabble",
+            Name = "nstoppable",
             ArtistId = 1,
             Genre = Discoteque.Data.Models.Genres.Urban
         });

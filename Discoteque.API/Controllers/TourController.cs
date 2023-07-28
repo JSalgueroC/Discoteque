@@ -23,8 +23,13 @@ namespace Discoteque.Business.Controllers{
         [HttpPost]
         [Route("CreateTour")]
         public async Task<IActionResult> CreateTour(Tour tour){
+            try{
             var result = await _tourService.CreateTour(tour);
             return Ok(result);
+            }
+            catch(Exception e){
+                return BadRequest(e.Message);
+            }
         }
 
         [HttpDelete]
